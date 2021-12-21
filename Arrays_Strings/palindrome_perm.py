@@ -39,3 +39,4 @@ if __name__ == "__main__":
 	test()
 	test("what is si what")
 	test("I am unique", False)
+	test("ppaalliinnddrroommee")

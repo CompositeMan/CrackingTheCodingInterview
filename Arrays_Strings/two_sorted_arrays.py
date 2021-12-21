@@ -24,7 +24,7 @@ def commons(a, b):
 
 
 def test( a = [13, 27, 35, 40, 49, 55, 59], b = [17, 35, 39, 40, 55, 58, 60], ans=3 ):
-	print(f"a:{a}\nb:{b}")
+	#print(f"a:{a}\nb:{b}")
 	c = commons(a,b)
 	assert c == ans
 
