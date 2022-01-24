@@ -1,5 +1,7 @@
 #Write code to remove duplicates from an unsorted linked list.
 
+import sys
+sys.path.append("..")
 from ll import LinkedList
 """
 -> 3 -> 3 -> 0 -> 2 -> 3 -> 3 -> 2 -> 3 -> 2 -> 1 -> 1 -> 2 -> 1 -> 0
@@ -47,6 +49,7 @@ def test_random():
 	ll.print()
 	s = "*" * 100
 	print(s)
+
 def test(r):
 	ll = LinkedList()
 	for i in r:
@@ -74,15 +77,4 @@ if __name__ == "__main__":
 
 	r = [1,2,3]
 	test(r)
-
-
-
-
-
-
-
-
-
-
-
 

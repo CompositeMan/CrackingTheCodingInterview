@@ -11,38 +11,36 @@ def compress(s):
 	comp = [""] * l
 
 	left = 0
-	ch = s[0]
 	comp[0] = s[0]
-	counter = 0
-	for runner in range(l):
-		if s[runner] == ch:
+	counter = 1
+	for runner in range(1,l):
+		
+		if s[runner] == comp[left]:
 			counter += 1
-		if runner < l-1:
-			print(F"{runner} -> left: {left}")	
-			comp[left] = ch 
+
+		else:
+			if left >= l-2:
+				return s
 			comp[left+1] = str(counter)
+			comp[left+2] = s[runner]
+			left +=2
 			counter = 1
-			left += 2
-			ch = s[runner]
 
-	if ch == s[-1]:
-		print(f"left is{left}")
-		comp[left] = counter				
-	print(comp)	
-
-	if len(comp) == l:
-		return s
-
+	if comp[left] == s[-1]:
+		comp[left+1] = str(counter)	
+			
 	return "".join(comp)		
 				
 
+def test(s="aabcccccaaa", c="a2b1c5a3"):
 
-def test(s="aabcccccaaa", c="a2blc5a3"):
-
+	# print(s)
 	r = compress(s)
-	#print(r)
+	# print(r, len(r), "==", c, len(c))
 	assert r == c
 
+from string import ascii_lowercase
 
-
-test()
+if __name__ == "__main__":
+	test()
+	test(ascii_lowercase, ascii_lowercase)

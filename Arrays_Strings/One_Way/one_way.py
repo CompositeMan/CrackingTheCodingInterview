@@ -11,23 +11,27 @@ def one_or_zero_edit_away(a, b):
 		return False
 	
 	l,s = (a,b) if l_a > l_b else (b,a)
-	diff = False
-	
-	l_s = min(l_a, l_b)
-	# if they are of same length, this does not work.
-	for i in range(l_s):
-		if s[i] != l[i+diff]:
+	i_1 = 0
+	i_2 = 0
+	diff = False	
+
+	while i_1 <  len(s) and i_2 <  len(l):
+		if s[i_1] != l[i_2]:
 			if diff:
 				return False
 			else:
 				diff = True
+				if l_a == l_b:
+					i_1 += 1
+		else:
+			i_1 += 1
+		i_2 += 1
 	
-	return True	
-
+	return True		
 
 def test(a="pale", b="ple", ans=True):
 	r = one_or_zero_edit_away(a,b)
-	print(r)
+	#print(r)
 	assert r == ans	
 
 
@@ -36,6 +40,8 @@ if __name__ == "__main__":
 	test("pales", "pale")
 	test("pale", "bale")	
 	test("pale", "bake", False)
+	test("pake", "bake")
+	test("pake", "bak", False)
 	
 	
 

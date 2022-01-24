@@ -60,4 +60,4 @@ if __name__ == "__main__":
 	test(10,10, swap_w_xor)
 	test(-1, -9, swap_w_xor)
 	test(-9, -1, swap_w_xor)
-	
+		

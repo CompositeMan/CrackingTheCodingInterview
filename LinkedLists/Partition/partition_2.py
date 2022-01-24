@@ -9,78 +9,48 @@
 """
 
 #Input: 3 -> 5 -> 8 -> 5 -> 10 -> 2 -> 1[partition=5] 
-
-stop = *1
-if smaller:
-	append at head
-
-if bigger:
-	append at tail 
-
-I need to remember the first tail I appended to, this way I can know where to stop
+# Create another LL for smaller ones, then merge the two.
 
 Output: 3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
 
 
 """
+from sys import path
+path.append("..")
 
 from ll import LinkedList as LL
+from ll import Node
+
 def partite(head, part):
 	if head == None or head.next == None:
 		return head
 
-	t = None
-	tail = get_tail(head)
-	stop = tail
-	while head.val >= part:
-		t = head
-		head = head.next
-		tail = append(tail, t)
-	prev = head
-	t = head.next
-	ex = False
-	while not ex:
-		if t == stop:
-			ex = True
-		if t.val >= part:
-			node = pop_next(prev)
-			tail  = append(tail, node)
-			t = prev.next
-		
-		else:
-			t = t.next
-			prev = prev.next
-	return head
-
-def get_tail(head):
-	t = head
-	while t.next != None:
-		t = t.next
-
-	return t
-
-def append(tail, node):
-	node.next = None
-	tail.next = node
-	return tail.next
-
-def pop_next(cur):
-	# assuming cur.next is not None 
+	before_start = Node(0) # dummy 
+	after_start = Node(0) # dummy 
+	b_end = before_start
+	a_end = after_start
 	
-	e = cur.next 
-	if cur.next.next == None:
-		cur.next = None
+	while head:
+		if head.val < part:
+			b_end.next = head
+			b_end = b_end.next
+			head = head.next
+			b_end.next = None
+		else:
+			a_end.next = head
+			a_end = a_end.next
+			head = head.next
+			a_end.next = None
+	
+	b_end.next = after_start.next
 
-	else:
-		cur.next = cur.next.next	
-	return e
+	return before_start.next
 
 def test(r, k, ans):
 	ll = LL()
 	for i in r:
 		ll.add(i)
-
-	print(f"Partition: {k} , linkedlist: ", end="")
+	print(f"Partition: {k} , linkedlist:", end="")
 	ll.print()
 	ll.head = partite(ll.head, k)
 	ll.print()
@@ -92,11 +62,11 @@ if __name__ == "__main__":
 	test(i, 6, o)
 	i =  [3,5,8,5,10,2,1]
 	p = 5
-	a = "Output: -> 3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8"
+	a = "Output: -> 3 -> 2 -> 1 -> 10 -> 5 -> 5 -> 8"
 	test(i, p, a)
 	i =  [3,5,8,9,10,2,1]
 	p = 5
-	a = "Output: -> 3 -> 1 -> 2 -> 10 -> 5 -> 8 -> 9"
+	a = "Output: -> 3 -> 2 -> 1 -> 10 -> 5 -> 8 -> 9"
 	test(i, p, a)
 
 
